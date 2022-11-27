@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import TruffleContract from "@truffle/contract";
 import Home from "./components/Home.jsx";
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import Navbars from "./components/Navbar.jsx";
 
 function App() {
   const [web3, setWeb3] = useState()
@@ -54,17 +56,6 @@ function App() {
           // default case if no metamask
           setweb3provider(new Web3.providers.HttpProvider("http://localhost:7545"));
       }
-
-      // contracts && contracts.deployed().then(instance => {
-      //   instance.votedEvent({}, {
-      //   fromBlock: 0,
-      //   toBlock: "latest"
-      //   }).watch ((err, event) => {
-      //   console.log("event triggered", event);
-      //   // A new vote cast
-      //   setVote(!voteCast);
-      //   }) 
-      // }); 
   }
 
   //load account data
@@ -81,32 +72,19 @@ function App() {
     event.preventDefault();
   }
 
-  // load contract data
-  // contracts.Election.deployed().then((instance) => {
-  //   setElectionInstance(instance);
-  //   return electionInstance.candidatesCount();
-  // }).then((candidatesCount) => {
-  //   for(var i=1; i<=candidatesCount; i++){
-  //     electionInstance.candidates(i).then((candidate) => {
-  //       var id = candidate[0];
-  //       var name = candidate[1];
-  //       var voteCount = candidate[2];
-  //       setCandidates([...candidates, {id: id, name: name, voteCount: voteCount}])
-  //     });
-  //   }
-  //   return electionInstance.voters(account);
-  // }).then(hasVoted => {
-  //   if (hasVoted){
-  //     setVote(true)
-  //   }
-  // }).catch((error) => console.warn(error));
-
   return (
+    <Router>
     <div id="App" >
       <div className="container">
-        <Home account={account} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>
+      <Navbars />
+      <Routes>
+        <Route exact path="/" element={<Home account={account} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}></Route>
+        <Route exact path = "/register" element={<div>Register</div>}></Route>
+      </Routes>
+          
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
