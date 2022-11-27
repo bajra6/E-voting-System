@@ -4,7 +4,7 @@ import TruffleContract from "@truffle/contract";
 import Home from "./components/Home.jsx";
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Navbar from "./components/Navbar.jsx";
-import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
 
 function App() {
   const [web3, setWeb3] = useState()
@@ -68,7 +68,13 @@ function App() {
   
   const castVote = (event, voteFor) => {
     console.log(voteFor, account);
-    web3.eth.sendTransaction({to: "0xa76e0037B973253A409a1F5a0c95a93B47585BC2", from: account, value: web3.utils.toWei("50")}).then(res => {
+    var toAddr;
+    for(var i=0; i<candidateCount.words[0]; i++){
+      if(candidates[i].id.words[0] == voteFor) {
+        toAddr = candidates[i].pubAdd
+      }
+    }
+    web3.eth.sendTransaction({to: toAddr, from: account, value: web3.utils.toWei("1")}).then(res => {
       electionInstance.vote(voteFor, { from: account})
       .then(result => window.location.reload(false))
     });
@@ -82,8 +88,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route exact path="/" element={<Home account={account} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
-              <Route exact path = "/register" element={<div>Register</div>}/>
-              <Route exact path = "/login" element={<Login/>} />
+              <Route exact path = "/register" element={<Register />}/>
             </Routes>
         </div>
       </div>

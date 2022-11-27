@@ -8,6 +8,7 @@ contract Election {
         uint id;
         string name;
         uint voteCount;
+        address pubAdd;
     }
 
     // store accounts already voted
@@ -20,14 +21,14 @@ contract Election {
 
     event votedEvent(uint indexed _candidateId);
 
-    constructor () public{
-        addCandidate("Candidate 1");
-        addCandidate("Candidate 2");
+    constructor (){
+        addCandidate("Candidate 1", 0xcDF6D921cC8e2Eb23ac7fD845502A6dfF76d4FeC);
+        addCandidate("Candidate 2", 0xcDF6D921cC8e2Eb23ac7fD845502A6dfF76d4FeC);
     }
 
-    function addCandidate (string memory _name) public {
+    function addCandidate (string memory _name, address _pubAdd) public {
         candidatesCount ++;
-        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0, _pubAdd);
     }
 
     function vote (uint _candidateId) public {
