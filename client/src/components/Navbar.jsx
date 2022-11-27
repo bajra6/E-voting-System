@@ -5,9 +5,6 @@ function Navbar() {
     const style = {
         backgroundColor: "#328f8a",
         backgroundImage: "linear-gradient(45deg,#328f8a,#08ac4b)",
-        position:"absolute", 
-        top:"0", 
-        left:"0", 
         display:"flex", 
         justifyContent:"space-between", 
         alignItems:"center",
