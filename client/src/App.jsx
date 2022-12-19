@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar.jsx";
 // import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import Voting from "./components/Voting.jsx";
+import Results from "./components/Results.jsx";
 
 function App() {
   const [web3, setWeb3] = useState()
@@ -85,7 +86,7 @@ function App() {
     }
     web3.eth.sendTransaction({to: toAddr, from: account, value: web3.utils.toWei("1")}).then(res => {
       electionInstance.vote(voteFor, { from: account})
-      .then(result => window.location.reload(false))
+      .then(result => {alert("Voting Successful! \nYour TxID:"+result.tx);window.location.reload(false)})
     });
     event.preventDefault();
   }
@@ -97,9 +98,8 @@ function App() {
             <Navbar />
             <Routes>
               <Route exact path="/" element={<Home account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
-              {/* <Route exact path = "/register" element={<Register />}/> */}
-              <Route exact path = "/login" element={<Login/>}/>
-              <Route exact path = "/voting" element={<Voting/>}/>
+              <Route exact path = "/voting" element={<Voting account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
+              <Route exact path = "/results" element={<Results account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
             </Routes>
         </div>
       </div>

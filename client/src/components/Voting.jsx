@@ -1,48 +1,42 @@
-import "../css/main.css"
+import "../css/main.css";
+import { Link } from "react-router-dom";
 
 function Voting({ account, candidates, castVote, hasVoted, votingPhase, publishResults }) {
-    return <div class="container">
-    <div class="todoBlock">
-      <div class="listHolder">
-        <div class="list">
-          <ul>
-            <li class="sam">
-              <img src ="https://www.bing.com/th?id=OIP.Dlvn1297Qm15AKvgJhH9ggHaHa&w=206&h=206&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" width="100px" height="100px"/>
-              &ensp; 
-              <div class="btn-primary">
-                <div style={{fontSize:"2rem"}}>Narendra Modi</div>
-                <div>0x8D95293Fb0E281d9BDc44E53CFa6dAc2E16285e0</div>
-              </div>
-            </li>
-            <li class="sam">
-              <img class="listimag" src ="https://upload.wikimedia.org/wikipedia/commons/6/63/Indian_National_Congress_hand_logo.png" width="100px" height="100px"/>
-              &ensp;
-              <div class="btn-primary">
-                <div style={{fontSize:"2rem"}}>Rahul Gandhi</div>
-                <div>0x8D95293Fb0E281d9BDc44E53CFa6dAc2E16285e0</div>
-              </div>
-            </li>
-            <li class="sam">
-              <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Logo_of_Shiv_Sena.svg/1024px-Logo_of_Shiv_Sena.svg.png" width="100px" height="100px"/>
-              &ensp;
-              <div class="btn-primary">
-                <div style={{fontSize:"2rem"}}>Eknath Shinde</div>
-                <div>0x8D95293Fb0E281d9BDc44E53CFa6dAc2E16285e0</div>
-              </div>
-            </li>
-            <li class="sam">
-              <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_various_Republican_Parties_of_India.svg/1024px-Flag_of_various_Republican_Parties_of_India.svg.png" width="100px" height="100px"/>
-              &ensp;
-              <div class="btn-primary">
-                <div style={{fontSize:"2rem"}}>Jayalalitha</div>
-                <div>0x8D95293Fb0E281d9BDc44E53CFa6dAc2E16285e0</div>
-              </div>
-            </li>           
-          </ul>
+    return <>
+    <div class="container">
+        <div class="todoBlock">
+        <div class="listHolder">
+            <div class="list">
+            <ul>
+                {candidates.map((candidate, i) => {
+                    console.log(candidate);
+                    var id = candidate[0].words[0];
+                    var name = candidate[1];
+                    // var votes = candidate[2].words[0];
+                    var pubAddr = candidate[3];
+                    var party = candidate[4];
+                    var logo = candidate[5];
+                    return <li class="sam">
+                        <img src ={logo} width="100px" height="100px"/>
+                        &ensp; 
+                        <div class="btn-primary">
+                            <div style={{fontSize:"2rem"}}>{name}</div>
+                            <div>{pubAddr}</div>
+                        </div>
+                        {votingPhase && !hasVoted?<div className = "btn-primary" style={{margin:"0 0 0 1rem"}} onClick={event => castVote(event, id)}>
+                            <div style={{textAlign:"center", fontSize:"1.5rem", padding:"10px 1rem"}}>Vote</div>
+                        </div>:<></>}
+                    </li>
+                })}       
+            </ul>
+            </div>
         </div>
-      </div>
+        </div>
+    {hasVoted?<div>You have Voted Already!</div>:<></>}
+    {!votingPhase && !publishResults?<div>Waiting for voting phase to start.</div>:<></>}
+    {publishResults?<div>Voting Phase has completed. Check results <Link style={{textDecoration:"underline" , cursor:"pointer", color: "white", margin:"0 0 0 0.5rem"}}to="/results">here</Link>!</div>:<></>}
     </div>
-  </div>
+  </>
 }
 
 export default Voting;

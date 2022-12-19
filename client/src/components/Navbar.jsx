@@ -19,6 +19,7 @@ function Navbar() {
         </div>
         <div style={{padding:"0 2rem 0 0"}}>
             <Link style={{textDecoration:"none", cursor:"pointer", color: "white", margin:"0 1rem 0 0"}}to="/">Home</Link>
+            <Link style={{textDecoration:"none", cursor:"pointer", color: "white", margin:"0 1rem"}}to="/voting">Vote</Link>
             <Link style={{textDecoration:"none", cursor:"pointer", color: "white", margin:"0 0 0 1rem"}}to="/results">Results</Link>
         </div>
     </div>    
