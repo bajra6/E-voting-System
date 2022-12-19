@@ -96,7 +96,7 @@ function App() {
       <div id="App" >
         <div>
             <Navbar />
-            <div>{!account?"Please login and refresh":""}</div>
+            {!account?<div style={{position:"absolute", top:"0", right:"0", backgroundColor:"#333", padding:"1rem 2rem", borderRadius:"0.5rem"}}>"Please login and refresh"</div>:<></>}
             <Routes>
               <Route exact path="/" element={<Home account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
               <Route exact path = "/voting" element={<Voting account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
