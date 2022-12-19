@@ -12,7 +12,7 @@ import Results from "./components/Results.jsx";
 function App() {
   const [web3, setWeb3] = useState()
   const [web3Provider, setweb3provider] = useState(null);
-  const [account, setAccount] = useState("0x0");
+  const [account, setAccount] = useState(false);
   const [voteCast, setVote] = useState(false);
   const [electionInstance, setElectionInstance] = useState()
   const [candidateCount, setCandidateCount] = useState()
@@ -96,6 +96,7 @@ function App() {
       <div id="App" >
         <div>
             <Navbar />
+            <div>{!account?"Please login and refresh":""}</div>
             <Routes>
               <Route exact path="/" element={<Home account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
               <Route exact path = "/voting" element={<Voting account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>

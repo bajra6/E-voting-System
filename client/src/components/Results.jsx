@@ -1,6 +1,6 @@
 function Results({ account, candidates, castVote, hasVoted, votingPhase, publishResults }) {
     return <>
-    {publishResults?<div class="container">
+    <div class="container">
         <div class="todoBlock">
             <div class="listHolder">
                 <div class="list">
@@ -29,7 +29,8 @@ function Results({ account, candidates, castVote, hasVoted, votingPhase, publish
                 </div>
             </div>
         </div>
-    </div>:<div>Results not generated. Wait for election to end!</div>}
+    {!publishResults?<div>Results not generated. Wait for election to end!</div>:<></>}
+    </div>
     </>
 }
 
