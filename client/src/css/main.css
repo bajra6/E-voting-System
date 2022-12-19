@@ -1,0 +1,53 @@
+body {
+background-color: #328f8a;
+background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+font-family: "Roboto", sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.vvbody {
+  font: 300 16px/1.5 'Roboto', sans-serif;
+  color: #333;
+  background: #e3e9ff;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 0 15px;
+}
+
+.btn-primary {
+  cursor: pointer;
+  background: #4ac7be;
+  border: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  color: #fff;
+  font: 300 16px/1.5 'Roboto', sans-serif;
+}
+
+.todoBlock {
+  padding: 1.5rem 2.5rem;
+  margin: 30px 0;
+  background: #fff;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+  padding: 0;
+}
+
+.listHolder li {
+  overflow: hidden;
+  padding: 0 0 1rem;
+  position: relative;
+}
+
+.sam{
+  display:flex
+}

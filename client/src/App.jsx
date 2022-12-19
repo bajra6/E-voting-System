@@ -4,7 +4,9 @@ import TruffleContract from "@truffle/contract";
 import Home from "./components/Home.jsx";
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Navbar from "./components/Navbar.jsx";
-import Register from "./components/Register.jsx";
+// import Register from "./components/Register.jsx";
+import Login from "./components/Login.jsx";
+import Voting from "./components/Voting.jsx";
 
 function App() {
   const [web3, setWeb3] = useState()
@@ -14,6 +16,9 @@ function App() {
   const [electionInstance, setElectionInstance] = useState()
   const [candidateCount, setCandidateCount] = useState()
   const [candidates, setCandidates] = useState([])
+
+  const [votingPhase, setVotingPhase] = useState(false)
+  const [publishResults, setPublishResults] = useState(false)
 
   useEffect(() => {
       initWeb3();
@@ -45,6 +50,8 @@ function App() {
       electionInstance.candidates(i).then(candidate => setCandidates(prevCandidates => [... prevCandidates, candidate]))
     }
     electionInstance && electionInstance.voters(account).then(hasVoted => setVote(hasVoted))
+    electionInstance && electionInstance.votingPhase().then(res => setVotingPhase(res))
+    electionInstance && electionInstance.publishResult().then(res => setPublishResults(res))
   }, [candidateCount, electionInstance])
 
   const initWeb3 = async function() {
@@ -65,6 +72,8 @@ function App() {
       setAccount(acc);
     }
   }); 
+
+
   
   const castVote = (event, voteFor) => {
     console.log(voteFor, account);
@@ -87,8 +96,10 @@ function App() {
         <div>
             <Navbar />
             <Routes>
-              <Route exact path="/" element={<Home account={account} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
-              <Route exact path = "/register" element={<Register />}/>
+              <Route exact path="/" element={<Home account={account} votingPhase={votingPhase} publishResults={publishResults} candidates={candidates} castVote={castVote} hasVoted={voteCast}/>}/>
+              {/* <Route exact path = "/register" element={<Register />}/> */}
+              <Route exact path = "/login" element={<Login/>}/>
+              <Route exact path = "/voting" element={<Voting/>}/>
             </Routes>
         </div>
       </div>
