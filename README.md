@@ -1,3 +1,5 @@
+Thanks to all YT tutorials and online articles. This project was fun and I learnt a lot.
+
 # React Truffle Box
 
 This box comes with everything you need to start using Truffle to write, compile, test, and deploy smart contracts, and interact with them from a React app.
